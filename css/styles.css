@@ -2,8 +2,23 @@
     margin-left: 200px;
 }
 p{
+    color: white;
     margin-left: 20px;
 }
-nav{
-    height: 76px;
+
+body{
+    background-color: #1b1c1d;
+}
+
+nav ul {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	display: flex;
+	justify-content: space-between;
+}
+
+nav li {
+	display: inline-block;
+	padding: 10px;
 }
