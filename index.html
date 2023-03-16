@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://unpkg.com/jquery@3.6.3/dist/jquery.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/fomantic-ui@2.9.2/dist/semantic.min.css">
+        <script src="https://unpkg.com/fomantic-ui@2.9.2/dist/semantic.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <title>Scorewise Bracket Maker</title>
+    </head>
+
+    <body>
+        <sidebar class="ui visible sidebar inverted vertical menu">
+            <header class="item">
+                <a class="ui logo icon image" href="/">
+                    <img src="/images/logo.png" alt="Scorewise Logo" width="50" height="50">
+                </a>
+                <a href="/"><b>Scorewise</b></a>
+            </header>
+            <div class="item">
+                Number of competitors:
+                <div class="ui input">
+                    <input type="text" placeholder="">
+                </div>
+            </div>
+            <div class="item">
+                Team 1:
+                <div class="ui input">
+                    <input type="text" placeholder="Team 1 Name">
+                </div>
+            </div>
+            <div class="item">
+                Team 2:
+                <div class="ui input">
+                    <input type="text" placeholder="Team 2 Name">
+                </div>
+            </div>
+            <div class="item">
+                Team 3:
+                <div class="ui input">
+                    <input type="text" placeholder="Team 3 Name">
+                </div>
+            </div>
+            <div class="item">
+                Team 4:
+                <div class="ui input">
+                    <input type="text" placeholder="Team 4 Name">
+                </div>
+            </div>
+            
+        </sidebar>
+
+        <section class="pusher">                
+            <nav class="ui menu inverted">
+                <a class="item">
+                    Single Elimination
+                </a>
+                <a class="item">
+                    Double Elimination
+                </a>
+                <a class="item">
+                    Round Robin
+                </a>
+            </nav>
+            <p>
+                Bracket Content
+            </p>
+        </section>
+    </body>
+</html>
