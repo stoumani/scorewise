@@ -128,11 +128,50 @@ function generateSingleBracket(size){
     //Add the round to the parent
     parent.appendChild(roundDiv);
 
-    //code for lines goes here
+    if(size>1){
+        const connectDiv = document.createElement("div");
+        connectDiv.classList.add("connectors");
+
+        //code for lines goes here
+        for(i=0; i<size/2; i++){
+            const topLine = document.createElement("div");
+            topLine.classList.add("top-line");
+
+            const botLine = document.createElement("div");
+            botLine.classList.add("bottom-line");
+
+            const vertLine = document.createElement("div");
+            vertLine.classList.add("vert-line");
+
+            const nextLine = document.createElement("div");
+            nextLine.classList.add("next-line");
+
+            const clear1 = document.createElement("div");
+            clear1.classList.add("clear");
+            const clear2 = document.createElement("div");
+            clear2.classList.add("clear");
+            const clear3 = document.createElement("div");
+            clear3.classList.add("clear");
+            const clear4 = document.createElement("div");
+            clear4.classList.add("clear");
+
+            connectDiv.appendChild(topLine);
+            connectDiv.appendChild(clear1);
+            connectDiv.appendChild(botLine);
+            connectDiv.appendChild(clear2);
+            connectDiv.appendChild(vertLine);
+            connectDiv.appendChild(clear3);
+            connectDiv.appendChild(nextLine);
+            connectDiv.appendChild(clear4);
+        }
+
+        parent.append(connectDiv);
+    }
+
 
     //Recursive if there are more than two players
     if(size>1){
-        generateBracket(size/2);
+        generateSingleBracket(size/2);
     }
 
 }

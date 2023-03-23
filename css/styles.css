@@ -26,14 +26,6 @@ nav li {
 	float: left;
 	margin-left: 220px
   }
-  
-  .round.r-of-4 {
-	  margin-left: 220px;
-	
-  }
-  .round.r-of-2 {
-	margin-top: 25px;
-  }
   .bracket-game {
 	max-width: 125px;
 	margin: 10px 0;
@@ -67,28 +59,29 @@ nav li {
 	float: left;
 	min-width: 35px;
   }
-  .connectors.r-of-2 .top-line {
+  .top-line {
 	position: relative;
 	top: 30px;
 	width: 17px;
 	border: 1px solid #AAA;
   }
-  .connectors.r-of-2 .bottom-line {
+  .bottom-line {
 	position: relative;
 	top: 81px;
 	width: 17px;
 	border: 1px solid #AAA;
+	margin-bottom: 47px;
   }
-  .connectors.r-of-2 .vert-line {
+ .vert-line {
 	position: relative;
-	top: 26px;
+	top: -21px;
 	left: -16px;
 	height: 55px;
 	border-right: 2px solid #AAA;
   }
-  .connectors.r-of-2 .next-line {
+.next-line {
 	position: relative;
-	top: -4px;
+	top: -50px;
 	left: 17px;
 	width: 17px;
 	border: 1px solid #AAA;
