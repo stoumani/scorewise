@@ -78,14 +78,10 @@ function generateSingleBracket(size){
     roundDiv.classList.add(`r-of-${size}`);
 
     //Construct a round of games
-    for(i=0; i<size; i++){
+    for(i=0; i<size/2; i++){
         //Create game div and class
         const bracketgameDiv = document.createElement("div");
         bracketgameDiv.classList.add("bracket-game");
-
-        const bracketgameContDiv = document.createElement("div");
-        bracketgameContDiv.classList.add("bracket-game");
-        bracketgameContDiv.classList.add("cont");
 
         let teamTop = document.createTextNode("Team");
         let teamBot = document.createTextNode("Team");
@@ -128,12 +124,12 @@ function generateSingleBracket(size){
     //Add the round to the parent
     parent.appendChild(roundDiv);
 
-    if(size>1){
+    if(size>2){
         const connectDiv = document.createElement("div");
         connectDiv.classList.add("connectors");
 
         //code for lines goes here
-        for(i=0; i<size/2; i++){
+        for(i=0; i<size/4; i++){
             const topLine = document.createElement("div");
             topLine.classList.add("top-line");
 
@@ -166,11 +162,7 @@ function generateSingleBracket(size){
         }
 
         parent.append(connectDiv);
-    }
 
-
-    //Recursive if there are more than two players
-    if(size>1){
         generateSingleBracket(size/2);
     }
 
