@@ -1,7 +1,54 @@
+/*const express = require('express');
+const bodyParser = require('body-parser');
+const sqlite3 = require('sqlite3').verbose();
+const app = express();
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+const db = new sqlite3.Database('mydb.db', (err) => {
+  if (err) {
+    return console.error(err.message);
+  }
+  console.log('Connected to the mydb.db SQLite database.');
+});
+
+db.run('CREATE TABLE IF NOT EXISTS emp (empid INTEGER PRIMARY KEY, empname TEXT, email TEXT)', (err) => {
+  if (err) {
+    return console.error(err.message);
+  }
+});
+
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
+
+app.post('/addEmployee', (req, res) => {
+  const { empid, empname, email } = req.body;
+  db.run(`INSERT INTO emp (empid, empname, email) VALUES (?, ?, ?)`, [empid, empname, email], (err) => {
+    if (err) {
+      return console.error(err.message);
+    }
+    res.redirect('/');
+  });
+});
+
+// Add this code after the /addEmployee endpoint
+app.get('/employees', (req, res) => {
+    db.all('SELECT * FROM emp', [], (err, rows) => {
+      if (err) {
+        return console.error(err.message);
+      }
+      res.send(rows);
+    });
+  });
+  
+app.listen(3000, () => {
+  console.log('Server is running on http://localhost:3000');
+}); */
+
 function generateSettings() {
     let num = document.getElementById("numMembers").value;
-
-    console.log(num);
 
     //To be taken out most likely
     let button = document.getElementById("subBtn");
@@ -40,35 +87,41 @@ function makeBracket() {
     //Get number
     let num = document.getElementById("numMembers").value;
 
-    let size = 2;
+    let size = 4;
     let extra = 0;
     let rounds = 1;
 
     //Determine bracket size, rounds, extra slots
-    for(i=1; num>2^i; i++){
-        size = 2^i;
-        extra = (2^i)%num;
-        rounds = i;
+    let index = 0;
+    while(num>Math.pow(2,index)){
+        index++;
     }
+    size = Math.pow(2,index);
+    extra = Math.pow(2,index)%num;
+    rounds = index
 
     //Create array for all teams
     const teams = [];
 
     //Get teams and fill array
     for(i=0; i<num; i++){
-        team = document.getElementById(`teamName${i+1}`);
+        team = document.getElementById(`teamName${i+1}`).value;
         teams[i] = team;
     }
     //Fill extra
     for(i=0; i<extra; i++){
-        team[num+i] = "-";
+        teams[num+i] = "-";
+    }
+    for(i=0; i<size; i++){
+        console.log(teams[i]);
     }
 
-    generateSingleBracket(num);
-
+    //Generate html
+    generateSingleBracket(size, size, teams);
 }
 
-function generateSingleBracket(size){
+function generateSingleBracket(size, originsize, teams){
+    
     //Get parent element
     const parent = document.getElementById("main");
 
@@ -83,8 +136,13 @@ function generateSingleBracket(size){
         const bracketgameDiv = document.createElement("div");
         bracketgameDiv.classList.add("bracket-game");
 
-        let teamTop = document.createTextNode("Team");
-        let teamBot = document.createTextNode("Team");
+        let teamTop = document.createTextNode("-");
+        let teamBot = document.createTextNode("-");
+
+        if(size===originsize){
+            teamTop = document.createTextNode(`${teams[i]}`);
+            teamBot = document.createTextNode(`${teams[i+1]}`);
+        }
         let scoreTop = document.createTextNode("0");
         let scoreBot = document.createTextNode("0");
 
@@ -163,7 +221,7 @@ function generateSingleBracket(size){
 
         parent.append(connectDiv);
 
-        generateSingleBracket(size/2);
+        generateSingleBracket(size/2, originsize);
     }
 
 }
