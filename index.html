@@ -8,61 +8,42 @@
         <link rel="stylesheet" type="text/css" href="https://unpkg.com/fomantic-ui@2.9.2/dist/semantic.min.css">
         <script src="https://unpkg.com/fomantic-ui@2.9.2/dist/semantic.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <script defer src="js/bracketmaker.js"></script>
         <title>Scorewise Bracket Maker</title>
     </head>
 
-    <body>
-        <sidebar class="ui visible sidebar inverted vertical menu">
+    <body id="main">
+        <sidebar id="sidebar" class="ui visible sidebar inverted vertical menu">
             <header class="item">
                 <a class="ui logo icon image" href="/">
-                    <img src="/images/logo.png" alt="Scorewise Logo" width="50" height="50">
+                    <img src="images/logo.png" alt="Scorewise Logo" width="50" height="50">
                 </a>
                 <a href="/"><b>Scorewise</b></a>
             </header>
             <div class="item">
                 Number of competitors:
                 <div class="ui input">
-                    <input type="text" placeholder="">
+                    <input id="numMembers" type="text" placeholder="Enter number...">
+                </div>
+            </div>
+            <div id="btnItem" class="item">
+                <div class="ui input">
+                    <button id="subBtn" type="button" onclick="generateSettings()">Submit</button>
                 </div>
             </div>
             <div class="item">
-                Team 1:
                 <div class="ui input">
-                    <input type="text" placeholder="Team 1 Name">
+                    <button type="button" onclick="makeBracket()">Generate</button>
                 </div>
             </div>
-            <div class="item">
-                Team 2:
-                <div class="ui input">
-                    <input type="text" placeholder="Team 2 Name">
-                </div>
-            </div>
-            <div class="item">
-                Team 3:
-                <div class="ui input">
-                    <input type="text" placeholder="Team 3 Name">
-                </div>
-            </div>
-            <div class="item">
-                Team 4:
-                <div class="ui input">
-                    <input type="text" placeholder="Team 4 Name">
-                </div>
-            </div>
-            
         </sidebar>
 
         <section class="pusher">                
             <nav class="ui menu inverted">
-                <ul>
-                    <li><a href="single-elimination.html">Single Elimination</a></li>
-                    <li><a href="double-elimination.html">Double Elimination</a></li>
-                    <li><a href="round-robin.html">Round Robin</a></li>
-                </ul>
+                <a class="item" href="single-elimination.html">Single Elimination</a>
+                <a class="item" href="double-elimination.html">Double Elimination</a>
+                <a class="item" href="round-robin.html">Round Robin</a>
             </nav>
-            <p>
-                Click on the options above!
-            </p>
         </section>
     </body>
 </html>
