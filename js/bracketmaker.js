@@ -165,6 +165,13 @@ function generateSingleBracket(size, originsize, teams){
         scoreBotDiv.classList.add("score");
         scoreBotDiv.appendChild(scoreBot);
 
+        if(size!==originsize){
+            roundDiv.style.marginLeft = 0;
+            let paddingSize = 12.5*(originsize/size);
+            bracketgameDiv.style.paddingTop = `${paddingSize}px`;
+            bracketgameDiv.style.paddingBottom = `${paddingSize}px`;
+        }
+
         //Add the score div to the player div
         playerTopDiv.appendChild(scoreTopDiv);
         playerBotDiv.appendChild(scoreBotDiv);
@@ -221,7 +228,7 @@ function generateSingleBracket(size, originsize, teams){
 
         parent.append(connectDiv);
 
-        generateSingleBracket(size/2, originsize);
+        generateSingleBracket(size/2, originsize, teams);
     }
 
 }
