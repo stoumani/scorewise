@@ -28,13 +28,15 @@ nav li {
   }
 .bracket-game {
 	max-width: 125px;
-	margin: 10px 0;
+	padding: 5px 0;
 }
 .player {
 	min-width: 100px;
 	border: 1px solid #aaaaaa64;
 	padding-left: 10px;
-	background: #EEE;  }
+	background: #EEE;
+	height: 22px;
+}
 .player.top {
 	border-radius: 3px 3px 0 0;
 }
@@ -72,24 +74,19 @@ input.score{
 	min-width: 35px;
 }
 .top-line {
-	position: relative;
-	top: 30px;
-	width: 17px;
-	border: 1px solid #AAA;
+    height: 1px;
+    border: 1px solid #AAA;
+    margin: 52px 0px;
 }
 .bottom-line {
-	position: relative;
-	top: 81px;
-	width: 17px;
-	border: 1px solid #AAA;
-	margin-bottom: 47px;
+    height: 1px;
+    border: 1px solid #AAA;
+    margin: 51px 0px;
 }
 .vert-line {
-	position: relative;
-	top: -19px;
-	left: -17px;
 	height: 53px;
-	border-right: 2px solid #AAA;
+	border-left: 2px solid #AAA;
+	margin: 51px 0px;
 }
 .next-line {
 	position: relative;
