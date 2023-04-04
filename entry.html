@@ -50,12 +50,14 @@
           </div>
           <div class="entry-form">
             <label for="name" class="field">Tournament Name:</label>
-            <input type="text" class="input w-input" maxlength="256" name="name" data-name="Name" placeholder="Enter your tournament name" id="name">
+            <input type="text" class="input w-input" maxlength="256" name="name" data-name="Name" placeholder="Enter your tournament name" id="name" required="">
             <label for="name-2" class="field">Format:</label>
             <select id="Format" name="Format" data-name="Format" required="" class="select-field w-select">
               <option value="">Select a format...</option>
               <option value="First">Single-Elimination</option>
             </select>
+            <label for="Participants" class="field">Participants:</label>
+            <input type="number" class="input w-input" maxlength="128" name="Participants" data-name="Participants" placeholder="Enter number of participants" id="Participants" required="">
             <label for="field" class="field">Description:</label>
             <textarea id="field" name="field" placeholder="Write a brief description of the tournament. eg. March Madness, etc. " maxlength="5000" data-name="field" class="input textarea w-input"></textarea>
             <input type="submit" value="Create" data-wait="Please wait..." class="button contact w-button">
