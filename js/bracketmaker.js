@@ -278,6 +278,19 @@ function generateSingleBracket(size, originsize, teams, count){
           const vertLine = document.createElement("div");
           vertLine.classList.add("vert-line");
 
+          if(i===0){
+            let lineHeight = Math.round((55.9075*Math.pow(Math.E, 0.682484*count))-1.15884);
+            let lineMargin = Math.round((26.6131*Math.pow(Math.E, 0.694033*count))+.500125);
+            vertLine.style.height = `${lineHeight}px`;
+            vertLine.style.margin = `${lineMargin}px 0px`;
+          }
+          else{
+            let lineHeight = Math.round((55.9075*Math.pow(Math.E, 0.682484*count))-1.15884)+1;
+            let lineMargin = Math.round((54.937*Math.pow(Math.E, 0.686665*count))-3.01247);
+            vertLine.style.height = `${lineHeight}px`;
+            vertLine.style.margin = `${lineMargin}px 0px`;
+          }
+
           connectDiv2.appendChild(vertLine);
         }
 
@@ -312,7 +325,10 @@ function generateSingleBracket(size, originsize, teams, count){
           }
 
           connectDiv3.appendChild(topLine);
-          connectDiv3.appendChild(botLine);
+          if(size!==4){
+            connectDiv3.appendChild(botLine);
+          }
+          
         }
 
         parent.append(connectDiv);
