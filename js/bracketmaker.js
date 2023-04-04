@@ -1,4 +1,15 @@
-/*const express = require('express');
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Name:    BracketMaker.js
+// 
+// Desc:    A javascript program that creates a database for the tournament website, generates the 
+//          html of the bracket, and updates the bracket after scores are added.
+//
+// Authors: Eric, Salem
+// Date:    March 7, 2023
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Genral requirements (JSON, SQLite, etc)
+const express = require('express');
 const bodyParser = require('body-parser');
 const sqlite3 = require('sqlite3').verbose();
 const app = express();
@@ -6,14 +17,16 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-const db = new sqlite3.Database('mydb.db', (err) => {
+//Create the database 
+const db = new sqlite3.Database('tournament.db', (err) => {
   if (err) {
     return console.error(err.message);
   }
-  console.log('Connected to the mydb.db SQLite database.');
+  console.log('Connected to the SQLite database.');
 });
 
-db.run('CREATE TABLE IF NOT EXISTS emp (empid INTEGER PRIMARY KEY, empname TEXT, email TEXT)', (err) => {
+//Create a table in the database if it does not exist
+db.run('CREATE TABLE IF NOT EXISTS tourny (id INTEGER PRIMARY KEY, team_name TEXT, team_placement TEXT)', (err) => {
   if (err) {
     return console.error(err.message);
   }
@@ -45,7 +58,7 @@ app.get('/employees', (req, res) => {
   
 app.listen(3000, () => {
   console.log('Server is running on http://localhost:3000');
-}); */
+});
 
 function generateSettings() {
     let num = document.getElementById("numMembers").value;
@@ -131,7 +144,7 @@ function generateSingleBracket(size, originsize, teams){
     roundDiv.classList.add(`r-of-${size}`);
 
     //Construct a round of games
-    for(i=0; i<size/2; i++){
+    for(i=0; i<size; i++){
         //Create game div and class
         const bracketgameDiv = document.createElement("div");
         bracketgameDiv.classList.add("bracket-game");
@@ -150,20 +163,34 @@ function generateSingleBracket(size, originsize, teams){
         const playerTopDiv = document.createElement("div");
         playerTopDiv.classList.add("player");
         playerTopDiv.classList.add("top");
+        playerTopDiv.setAttribute("id", `r-of-${size}-team-${i}`);
+        playerTopDiv.setAttribute("name", `r-of-${size}-team-${i}`);
         playerTopDiv.appendChild(teamTop);
 
         const playerBotDiv = document.createElement("div");
         playerBotDiv.classList.add("player");
         playerBotDiv.classList.add("bot");
+        playerBotDiv.setAttribute("id", `r-of-${size}-team-${i+1}`);
+        playerBotDiv.setAttribute("name", `r-of-${size}-team-${i+1}`);
         playerBotDiv.appendChild(teamBot);
 
         //Create score div and class
-        const scoreTopDiv = document.createElement("div");
+        const scoreTopDiv = document.createElement("input");
         scoreTopDiv.classList.add("score");
-        scoreTopDiv.appendChild(scoreTop);
-        const scoreBotDiv = document.createElement("div");
+        scoreTopDiv.setAttribute("id", `r-of-${size}-team-${i}-score`);
+        scoreTopDiv.setAttribute("name", `r-of-${size}-team-${i}-score`);
+        scoreTopDiv.setAttribute("onChange",`determineWinner(this.value, ${size}, ${i}, ${i+1})`);
+        scoreTopDiv.setAttribute("type", "number");
+        scoreTopDiv.setAttribute("placeholder","0");
+        //scoreTopDiv.appendChild(scoreTop);
+        const scoreBotDiv = document.createElement("input");
         scoreBotDiv.classList.add("score");
-        scoreBotDiv.appendChild(scoreBot);
+        scoreBotDiv.setAttribute("id", `r-of-${size}-team-${i+1}-score`);
+        scoreBotDiv.setAttribute("name", `r-of-${size}-team-${i+1}-score`);
+        scoreBotDiv.setAttribute("onChange",`determineWinner(this.value, ${size}, ${i+1}, ${i})`);
+        scoreBotDiv.setAttribute("type", "number");
+        scoreBotDiv.setAttribute("placeholder","0");
+        //scoreBotDiv.appendChild(scoreBot);
 
         if(size!==originsize){
             roundDiv.style.marginLeft = 0;
@@ -184,6 +211,7 @@ function generateSingleBracket(size, originsize, teams){
 
         //Add the game div to the round div
         roundDiv.appendChild(bracketgameDiv);
+        i++;
     }
 
     //Add the round to the parent
@@ -217,13 +245,13 @@ function generateSingleBracket(size, originsize, teams){
             clear4.classList.add("clear");
 
             connectDiv.appendChild(topLine);
-            connectDiv.appendChild(clear1);
+            //connectDiv.appendChild(clear1);
             connectDiv.appendChild(botLine);
-            connectDiv.appendChild(clear2);
+           // connectDiv.appendChild(clear2);
             connectDiv.appendChild(vertLine);
-            connectDiv.appendChild(clear3);
+            //connectDiv.appendChild(clear3);
             connectDiv.appendChild(nextLine);
-            connectDiv.appendChild(clear4);
+            //connectDiv.appendChild(clear4);
         }
 
         parent.append(connectDiv);
@@ -231,4 +259,33 @@ function generateSingleBracket(size, originsize, teams){
         generateSingleBracket(size/2, originsize, teams);
     }
 
+}
+
+function determineWinner(score, size, team_num, opponent_num){
+  let team = `r-of-${size}-team-${team_num}`;
+  let opponent = `r-of-${size}-team-${opponent_num}`;
+  let opponent_score = document.getElementById(`r-of-${size}-team-${opponent_num}-score`).value;
+
+  score = Number(score);
+  opponent_score = Number(opponent_score);
+
+  if(score>opponent_score){
+    document.getElementById(team).classList.remove("loss");
+    document.getElementById(team).classList.add("win");
+    document.getElementById(opponent).classList.add("loss");
+    document.getElementById(opponent).classList.remove("win");
+
+
+    document.getElementById(`r-of-${size/2}-team-${Math.floor(team_num/2)}`).firstChild.replaceWith(
+      document.createTextNode(document.getElementById(team).textContent));
+  }
+  else if(score<opponent_score){
+    document.getElementById(opponent).classList.remove("loss");
+    document.getElementById(opponent).classList.add("win");
+    document.getElementById(team).classList.add("loss");
+    document.getElementById(team).classList.remove("win");
+
+    document.getElementById(`r-of-${size/2}-team-${Math.floor(team_num/2)}`).firstChild.replaceWith(
+      document.createTextNode(document.getElementById(opponent).textContent));
+  }
 }

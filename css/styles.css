@@ -24,68 +24,80 @@ nav li {
 }
 .round {
 	float: left;
-	margin-left: 220px
+	margin-left: 220px;
   }
-  .bracket-game {
+.bracket-game {
 	max-width: 125px;
 	margin: 10px 0;
-  }
-  .player {
+}
+.player {
 	min-width: 100px;
 	border: 1px solid #aaaaaa64;
 	padding-left: 10px;
 	background: #EEE;  }
-  .player.top {
+.player.top {
 	border-radius: 3px 3px 0 0;
-  }
-  .player.bot {
+}
+.player.bot {
 	border-radius: 0 0 3px 3px;
-  }
-  .player .score {
+}
+input.score{
+	display: inline;
+	float: right;
+	border-left: 1px solid #AAA;
+	padding: 0px;
+	background: #EEE;
+	border: none;
+	box-sizing: border-box;
+	width: 50%;
+	height: 20px;
+}
+.player .score{
 	display: inline;
 	float: right;
 	border-left: 1px solid #AAA;
 	padding-left: 10px;
 	padding-right: 10px;
 	background: #EEE;
-  }
-  .player.win {
+}
+
+.player.win {
 	background-color: #B8F2B8;
-  }
-  .player.loss {
+}
+.player.loss {
 	background-color: #F2B8B8;
-  }
-  .connectors {
+}
+.connectors {
 	float: left;
 	min-width: 35px;
-  }
-  .top-line {
+}
+.top-line {
 	position: relative;
 	top: 30px;
 	width: 17px;
 	border: 1px solid #AAA;
-  }
-  .bottom-line {
+}
+.bottom-line {
 	position: relative;
 	top: 81px;
 	width: 17px;
 	border: 1px solid #AAA;
 	margin-bottom: 47px;
-  }
- .vert-line {
+}
+.vert-line {
 	position: relative;
 	top: -19px;
 	left: -17px;
 	height: 53px;
 	border-right: 2px solid #AAA;
-  }
+}
 .next-line {
 	position: relative;
 	top: -50px;
 	left: 17px;
 	width: 17px;
 	border: 1px solid #AAA;
-  }
-  .clear {
+}
+.clear {
 	clear: both;
-  }
+}
