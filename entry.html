@@ -47,19 +47,19 @@
               BASIC INFORMATION
             </h3>
           </div>
-          <form onsubmit="">
+          <section>
 
               <label for="name" class="field">Tournament Name:</label>
-              <input type="text" class="input w-input" maxlength="256" name="name" data-name="Name" placeholder="Enter your tournament name" id="name" required="">
+              <input type="text" class="input w-input" maxlength="256" name="name" data-name="Name" placeholder="Enter your tournament name" id="nametour" required>
               
               <label for="name-2" class="field">Format:</label>
-              <select id="Format" name="Format" data-name="Format" required="" class="select-field w-select">
+              <select id="format" name="Format" data-name="Format" required class="select-field w-select">
                 <option value="">Select a format...</option>
                 <option value="single-elimination">Single-Elimination</option>
               </select>
               
               <label for="Participants" class="field">Participants:</label>
-              <select id="Format" name="Format" data-name="Format" required="" class="select-field w-select" onchange="generateSettings(this.value)">
+              <select id="numteams" name="numteams" data-name="numteams" required class="select-field w-select" onchange="generateSettings(this.value)">
                 <option value="0">Select a number...</option>
                 <option value="4">4</option>
                 <option value="8">8</option>
@@ -69,15 +69,15 @@
               </select>
               
               <label for="field" class="field">Description:</label>
-              <textarea id="field" name="field" placeholder="Write a brief description of the tournament. eg. March Madness, etc. " maxlength="5000" data-name="field" class="input textarea w-input"></textarea>
+              <textarea id="desc" name="desc" placeholder="Write a brief description of the tournament. eg. March Madness, etc. " maxlength="5000" data-name="field" class="input textarea w-input"></textarea>
               
               <section id="participants">
 
               </section>
               
-              <button id="submit" type="submit" class="btn btn-light" style="width: 200px;">Submit</button>
+              <button id="submit" type="submit" class="btn btn-light" style="width: 200px;" onclick="fillDatabase()">Submit</button>
 
-            </form>
+            </section>
         </main>
       </div>
     </body>

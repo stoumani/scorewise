@@ -6,43 +6,18 @@
 // Authors: Eric, Salem
 // Date:    April 7, 2023
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+let num = localStorage["num_teams"];
+console.log(`Number of teams: ${num}`);
+let teams =[];
 
-function makeBracket() {
-    //Get number
-    let num = document.getElementById("numMembers").value;
-
-    let size = 4;
-    let extra = 0;
-    let rounds = 1;
-
-    //Determine bracket size, rounds, extra slots
-    let index = 0;
-    while(num>Math.pow(2,index)){
-        index++;
-    }
-    size = Math.pow(2,index);
-    extra = Math.pow(2,index)%num;
-    rounds = index
-
-    //Create array for all teams
-    const teams = [];
-
-    //Get teams and fill array
-    for(i=0; i<num; i++){
-        team = document.getElementById(`teamName${i+1}`).value;
-        teams[i] = team;
-    }
-    //Fill extra
-    for(i=0; i<extra; i++){
-        teams[num+i] = "-";
-    }
-    for(i=0; i<size; i++){
-        console.log(teams[i]);
-    }
-
-    //Generate html
-    generateSingleBracket(size, size, teams, 0);
+for(i=0; i<num; i++){
+  let team = localStorage[`teamName${i}`];
+  console.log(`Team: ${i} - ${team}`);
+  teams[i] = team;
 }
+
+generateSingleBracket(num, num, teams, 0);
+
 
 function generateSingleBracket(size, originsize, teams, count){
 

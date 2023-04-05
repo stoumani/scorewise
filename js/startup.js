@@ -2,63 +2,11 @@
 // Name:    startup.js
 // 
 // Desc:    A javascript program that creates a database for the tournament website, generates the 
-//          html for teaminput in the database with the teams
+//          html for team input in the database with the teams
 //
 // Authors: Eric, Salem
 // Date:    April 7, 2023
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-//Genral requirements (JSON, SQLite, etc)
-const express = require('express');
-const bodyParser = require('body-parser');
-const sqlite3 = require('sqlite3').verbose();
-const app = express();
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-//Create the database 
-const db = new sqlite3.Database('tournament.db', (err) => {
-  if (err) {
-    return console.error(err.message);
-  }
-  console.log('Connected to the SQLite database.');
-});
-
-//Create a table in the database if it does not exist
-db.run('CREATE TABLE IF NOT EXISTS tourny (id INTEGER PRIMARY KEY, team_name TEXT, team_placement TEXT)', (err) => {
-  if (err) {
-    return console.error(err.message);
-  }
-});
-
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
-
-app.post('/addEmployee', (req, res) => {
-  const { empid, empname, email } = req.body;
-  db.run(`INSERT INTO emp (empid, empname, email) VALUES (?, ?, ?)`, [empid, empname, email], (err) => {
-    if (err) {
-      return console.error(err.message);
-    }
-    res.redirect('/');
-  });
-});
-
-// Add this code after the /addEmployee endpoint
-app.get('/employees', (req, res) => {
-    db.all('SELECT * FROM emp', [], (err, rows) => {
-      if (err) {
-        return console.error(err.message);
-      }
-      res.send(rows);
-    });
-  });
-  
-app.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000');
-});
 
 function generateSettings(num) {
 
@@ -90,11 +38,13 @@ function generateSettings(num) {
         const input1 = document.createElement("input");
         input1.classList.add("input");
         input1.classList.add("w-input");
+        input1.required = true;
         input1.setAttribute('id', `teamName${i}`);
 
         const input2 = document.createElement("input");
         input2.classList.add("input");
         input2.classList.add("w-input");
+        input2.required = true;
         input2.setAttribute('id', `teamName${i+1}`);
       
         //Build the structure
@@ -115,4 +65,25 @@ function generateSettings(num) {
         i++;
     }
 
+}
+
+function fillDatabase(){
+    let tournamentName = document.getElementById("nametour").value;
+    let format = document.getElementById("format").value;
+    let numTeams = document.getElementById("numteams").value;
+    let decription = document.getElementById("desc").value;
+
+    localStorage["tournament_name"] = tournamentName;
+    localStorage["format"] = format;
+    localStorage["num_teams"] = numTeams;
+    localStorage["desc"] = decription;
+
+    //Get teams and fill database
+    for(i=0; i<numTeams; i++){
+        let team = document.getElementById(`teamName${i}`).value;
+        localStorage[`teamName${i}`] = team;
+        console.log(`Team: ${i}, ${team}`);
+    }
+
+    document.location.href = "http://127.0.0.1:5500/index.html";
 }
