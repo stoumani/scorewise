@@ -1,5 +1,5 @@
 # Scorewise
-![alt text](https://imgur.com/a/gg3OlDL.png)
+!(https://imgur.com/a/gg3OlDL.png)
 This is a simple bracket maker wesbite built using HTML and JS. The application allows you to create brackets for various types of tournaments or competitions.
 
 Features
