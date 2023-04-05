@@ -1,100 +1,11 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 // Name:    BracketMaker.js
 // 
-// Desc:    A javascript program that creates a database for the tournament website, generates the 
-//          html of the bracket, and updates the bracket after scores are added.
+// Desc:    A javascript program that generates the html for the bracket depending on the size.
 //
 // Authors: Eric, Salem
-// Date:    March 7, 2023
+// Date:    April 7, 2023
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-//Genral requirements (JSON, SQLite, etc)
-const express = require('express');
-const bodyParser = require('body-parser');
-const sqlite3 = require('sqlite3').verbose();
-const app = express();
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-//Create the database 
-const db = new sqlite3.Database('tournament.db', (err) => {
-  if (err) {
-    return console.error(err.message);
-  }
-  console.log('Connected to the SQLite database.');
-});
-
-//Create a table in the database if it does not exist
-db.run('CREATE TABLE IF NOT EXISTS tourny (id INTEGER PRIMARY KEY, team_name TEXT, team_placement TEXT)', (err) => {
-  if (err) {
-    return console.error(err.message);
-  }
-});
-
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/index.html');
-});
-
-app.post('/addEmployee', (req, res) => {
-  const { empid, empname, email } = req.body;
-  db.run(`INSERT INTO emp (empid, empname, email) VALUES (?, ?, ?)`, [empid, empname, email], (err) => {
-    if (err) {
-      return console.error(err.message);
-    }
-    res.redirect('/');
-  });
-});
-
-// Add this code after the /addEmployee endpoint
-app.get('/employees', (req, res) => {
-    db.all('SELECT * FROM emp', [], (err, rows) => {
-      if (err) {
-        return console.error(err.message);
-      }
-      res.send(rows);
-    });
-  });
-  
-app.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000');
-});
-
-function generateSettings() {
-    let num = document.getElementById("numMembers").value;
-
-    //To be taken out most likely
-    let button = document.getElementById("subBtn");
-    button.remove();
-
-    for(i=1; i<=num; i++){
-        //Create elements
-        const divItem = document.createElement("div");
-        const divInput = document.createElement("div");
-        const input = document.createElement("input");
-
-        //Add classes and ids for those needed
-        divItem.classList.add("item");
-        divInput.classList.add("ui");
-        divInput.classList.add("input");
-        input.setAttribute('id', `teamName${i}`);
-
-        //Create text
-        const teamName = document.createTextNode(`Team ${i}`);
-        
-        //Build the structure
-        divInput.appendChild(input);
-        divItem.appendChild(teamName);
-        divItem.appendChild(divInput);
-
-        //Get the parent
-        const element = document.getElementById("sidebar");
-
-        //Add the structure
-        element.appendChild(divItem);
-    }
-
-}
 
 function makeBracket() {
     //Get number

@@ -88,13 +88,3 @@ input.score{
 	border-left: 2px solid #AAA;
 	margin: 52px 0px;
 }
-.next-line {
-	position: relative;
-	top: -50px;
-	left: 17px;
-	width: 17px;
-	border: 1px solid #AAA;
-}
-.clear {
-	clear: both;
-}
