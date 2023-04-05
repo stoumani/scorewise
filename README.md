@@ -1,5 +1,5 @@
 # Scorewise
-This is a simple bracket maker wesbite built using React. The application allows you to create brackets for various types of tournaments or competitions.
+This is a simple bracket maker wesbite built using HTML and JS. The application allows you to create brackets for various types of tournaments or competitions.
 
 Features
 
