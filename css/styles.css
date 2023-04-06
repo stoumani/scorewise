@@ -29,7 +29,7 @@ body {
 
 
 .cover-container {
-  max-width: 42em;
+  max-width: 60em;
 }
 
 
@@ -115,7 +115,6 @@ p {
 }
 .round {
 	float: left;
-	margin-left: 220px;
   }
 .bracket-game {
 	max-width: 125px;
