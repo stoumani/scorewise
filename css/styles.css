@@ -73,10 +73,13 @@ nav-masthead .nav-link {
 }
 .player {
 	min-width: 100px;
-	border: 1px solid #aaaaaa64;
-	padding-left: 10px;
-	background: #EEE;
-	height: 22px;
+    border: 1px solid #aaaaaa64;
+    padding-left: 10px;
+    background: #EEE;
+    height: 22px;
+    color: black;
+    text-align: left;
+    font-size: 14px;
 }
 .player.top {
 	border-radius: 3px 3px 0 0;
