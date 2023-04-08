@@ -4,7 +4,7 @@ This is a simple bracket maker wesbite built using HTML, CSS and JS. The applica
 
 Features
 
-* Create brackets for single-elimination tournaments
+* Create brackets for single-elimination tournaments (double elimination and round robin not implemented yet)
 * Add, remove, or modify participants and their details.
 * Generate random brackets based on the number of participants.
 * View and print brackets in a user-friendly format.
